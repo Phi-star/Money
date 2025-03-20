@@ -26,24 +26,13 @@ function validateStep() {
             alert("Cardholder's name must only contain letters.");
             return false;
         }
-
-        if (input.id === "cardNumber" && !/^\d{16}$/.test(input.value)) {
-            alert("Card number must be exactly 16 digits.");
-            return false;
-        }
-
-        if (input.id === "expiryDate" && !/^(0[1-9]|1[0-2])\/\d{2}$/.test(input.value)) {
-            alert("Expiration date must be in MM/YY format.");
-            return false;
-        }
-
-        if (input.id === "cvv" && !/^\d{3}$/.test(input.value)) {
-            alert("CVV must be exactly 3 digits.");
-            return false;
-        }
-    }
-    return true;
+       
+        if (input.id === "cvv" && !/^\d{3,4}$/.test(input.value)) {
+    alert("CVV must be 3 or 4 digits.");
+    return false;
 }
+return true;
+
 // Save progress
 function saveProgress() {
     localStorage.setItem("currentStep", currentStep);
@@ -65,6 +54,18 @@ document.getElementById("expiryDate").addEventListener("input", function (e) {
     }
 
     e.target.value = input;
+});
+document.getElementById("cardNumber").addEventListener("input", function (e) {
+    let input = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+    e.target.value = input;
+
+    // Regular expression for common credit card prefixes (Visa, Mastercard, AMEX, etc.)
+    const creditCardRegex = /^(4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13})$/;
+
+    if (input.length >= 13 && !creditCardRegex.test(input)) {
+        alert("Invalid card number. Only credit cards are allowed.");
+        e.target.value = "";
+    }
 });
 
 // Load progress

